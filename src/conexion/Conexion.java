@@ -4,16 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import util.MySqlProperties;
+import util.MySqlPropertiesLoader;
+
 public class Conexion {
 
-    private static final String CONTROLADOR = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/bd_sistema";
-    private static final String USUARIO = "root";
-    private static final String CLAVE = "mysql";
-
+	private static MySqlPropertiesLoader mysqlPropertiesLoader = new MySqlPropertiesLoader();
+	private static MySqlProperties mysqlProperties = mysqlPropertiesLoader.loadMySqlProperties();
+	
     static {
         try {
-            Class.forName(CONTROLADOR);
+        	Class.forName(mysqlProperties.getDriver());
         } catch (ClassNotFoundException e) {
             System.out.println("Error al cargar el controlador");
             e.printStackTrace();
@@ -24,7 +25,7 @@ public class Conexion {
         Connection conexion = null;
         
         try {
-            conexion = DriverManager.getConnection(URL, USUARIO, CLAVE);
+            conexion = DriverManager.getConnection(mysqlProperties.getUrl(), mysqlProperties.getUser(), mysqlProperties.getPassword());
             System.out.println("Conexión OK");
 
         } catch (SQLException e) {
