@@ -1,13 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Inicio de Sesión</title>
+<meta charset="UTF-8">
+<title>Inicio de SesiÃ³n</title>
 </head>
 <body>
 	<form action="usuario" method="post">
+		<input type="hidden" name="tipo" value="iniciarSesion" />
 		<table>
 			<tr>
 				<td>Usuario</td>
@@ -18,7 +19,7 @@
 				<td><input type="password" name="clave" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Iniciar sesión"/></td>
+				<td colspan="2"><input type="submit" value="Iniciar sesiÃ³n"/></td>
 			</tr>
 		</table>
 		<div>

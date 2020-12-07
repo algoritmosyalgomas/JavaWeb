@@ -18,6 +18,16 @@ public class ServletUsuario extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String tipo = request.getParameter("tipo");
+		
+		if ("iniciarSesion".equals(tipo)) {
+			this.iniciarSesion(request, response);
+		} else if ("cerrarSesion".equals(tipo)) {
+			this.cerrarSesion(request, response);
+		}
+	}
+	
+	private void iniciarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nombre = request.getParameter("nombre");
 		String clave = request.getParameter("clave");
 
@@ -33,5 +43,11 @@ public class ServletUsuario extends HttpServlet {
 			response.sendRedirect("principal.jsp");
 		}
 	}
-
+	
+	private void cerrarSesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sesion = request.getSession();
+		sesion.invalidate();
+		request.setAttribute("mensaje", "Iniciar sesión");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 }
